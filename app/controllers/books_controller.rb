@@ -12,6 +12,7 @@ class BooksController < ApplicationController
       redirect_to book_path(@book),notice:'Book was successfully created.'
       else
         flash.now[:alert] = 'メッセージを入力してください。'
+        @books =Book.all
         render :index
       end
     end
@@ -33,6 +34,9 @@ class BooksController < ApplicationController
     @book = Book.find(params[:id])
     if @book.update(book_params)
     redirect_to book_path(@book),notice:'Book was successfully updated'
+  else
+    @books =Book.all
+    render :edit
   end
 end
 
